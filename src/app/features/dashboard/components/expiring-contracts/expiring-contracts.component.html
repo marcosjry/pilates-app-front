@@ -1,0 +1,26 @@
+<div class="priority-high">
+    <mat-icon class="material-icons-outlined">priority_high</mat-icon>
+    <h2>Contratos próximos a expirar</h2>
+</div>
+<mat-list>
+    <div *ngFor="let expiring of expiringContracts" class="list-container">
+        <div class="list-item">
+            <div class="hour-class">
+                <p class="text-bold">{{expiring.customerName}}</p>
+                <p class="text">Contrato Expira: {{expiring.expiresAt | formatoDataExtenso}}</p>
+            </div>
+            <div class="student-item">
+                <p>{{ expiring.contractStatus | translateContractStatus: 'dd/MM/yyyy' }}</p>
+            </div>
+        </div>
+    </div>
+</mat-list>
+
+<app-loading-spinner
+    [spinnerSize]="80">
+</app-loading-spinner>
+
+<app-no-content
+    *ngIf="expiringContracts.length === 0 && !isLoading"
+    [text]="'Sem contratos a expirar nos próximos 7 dias.'">
+</app-no-content>
