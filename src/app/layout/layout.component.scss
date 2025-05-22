@@ -1,0 +1,23 @@
+.app-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.layout-container {
+    overflow-y: auto;
+    width: 100%; 
+}
+
+mat-card {
+    border-radius: 0;
+    border: none;
+    background-color: none;
+    background: none;
+}
+
+mat-card-title {
+    font-weight: 700;
+}
