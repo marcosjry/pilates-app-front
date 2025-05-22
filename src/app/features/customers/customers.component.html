@@ -1,0 +1,25 @@
+<app-layout [title]="'Clientes'">
+    <app-search
+        (onSearch)="onSearch($event)">
+    </app-search>
+
+    <app-filter 
+        (onFilter)="onFilter($event)">
+    </app-filter>
+
+    <app-customers-list
+        *ngIf="customersList.length > 0 && !isLoading"
+        [customers]="customersList"
+    ></app-customers-list>
+
+    <app-no-content
+        *ngIf="customersList.length === 0 && !isLoading"
+        [text]="'Nenhum Cliente até o momento'">
+    </app-no-content>
+
+    <app-loading-spinner
+        [spinnerSize]="80"
+        >
+    </app-loading-spinner>
+    
+</app-layout>
