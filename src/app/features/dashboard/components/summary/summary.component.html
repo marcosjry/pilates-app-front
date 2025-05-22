@@ -1,0 +1,33 @@
+<div class="summary-content">
+
+    <mat-card class="background-color-2" appearance="outlined">
+        <mat-card-header>
+            <mat-card-subtitle>
+                <div class="summary-subtitle color-2">
+                    <mat-icon aria-hidden="true" fontIcon="group"></mat-icon>
+                    Total de Alunos
+                </div>
+            </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content class="color-2">
+            {{summaryTotals.countCustomers}}
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="background-color-1" appearance="outlined">
+        <mat-card-header>
+            <mat-card-subtitle>
+                <div class="summary-subtitle color-1">
+                    <mat-icon aria-hidden="false" fontIcon="assignment_turned_in"></mat-icon>
+                    Total de Contratos Ativos
+                </div>
+            </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content class="color-1">
+            {{summaryTotals.countActiveContracts}}
+        </mat-card-content>
+    </mat-card>
+
+</div>
