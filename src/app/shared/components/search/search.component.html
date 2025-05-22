@@ -1,0 +1,16 @@
+<form>
+    <div class="search-container">
+        <div class="search-icon">
+            <mat-icon>search</mat-icon>
+        </div>
+        <input 
+            type="text" 
+            class="search-input" 
+            [formControl]="searchControl" 
+            [placeholder]="placeholder"
+            aria-label="Search">
+        <div *ngIf="searchControl.value" class="clear-icon" (click)="clearSearch()">
+            <mat-icon>close</mat-icon>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,26 @@
+<nav class="nav-container">
+    <ul class="nav-bar-wrapper">
+        <li class="nav-item" [class.active]="activeRoute === '/'" (click)="navigate('')">
+            <mat-icon>home</mat-icon>
+            <p>Home</p>
+        </li>
+        <li class="nav-item" [class.active]="activeRoute === '/clients'" (click)="navigate('/clients')">
+            <mat-icon>group</mat-icon>
+            <p>Clientes</p>
+        </li>
+        <li class="nav-item add-button" (click)="navigate('/adicionar')">
+            <div class="add-circle">
+                <mat-icon>add</mat-icon>
+            </div>
+            <p>Adicionar</p>
+        </li>
+        <li class="nav-item" [class.active]="activeRoute === '/contratos'" (click)="navigate('/contratos')">
+            <mat-icon>assignment</mat-icon>
+            <p>Contratos</p>
+        </li>
+        <li class="nav-item" [class.active]="activeRoute === '/agendamento'" (click)="navigate('/agendamento')">
+            <mat-icon>event_upcoming</mat-icon>
+            <p>Agendamento</p>
+        </li>
+    </ul>
+</nav>
