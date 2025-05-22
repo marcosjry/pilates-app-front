@@ -1,0 +1,57 @@
+h2 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.text {
+    color: rgb(107 114 128 );
+}
+
+.list-container {
+    width: 100%;
+}
+
+.list-item {
+    margin-bottom: 15px;
+    padding: 17px 15px;
+    border-radius: 15px;
+    border-left: 5px solid rgb(255, 208, 0);
+    box-shadow: 0px 4px 5px -3px rgba(0,0,0,0.1);
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+}
+
+.student-item {
+    height: 30px;
+    padding: 0 10px;
+    font-weight: 500;
+    color: rgb(45, 160, 0);
+    font-size: 14px;
+    border-radius: 25px;
+    background-color: rgb(129, 255, 79);
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+p {
+    padding: 0;
+    margin: 0;
+}
+
+.priority-high {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    mat-icon {
+        height: 16px;
+        width: 16px;
+        border-radius: 50%;
+        border: 2px solid rgb(255, 208, 0);
+        text-align: center;
+        font-size: 15px;
+        color: rgb(255, 208, 0) ;
+    }
+}
