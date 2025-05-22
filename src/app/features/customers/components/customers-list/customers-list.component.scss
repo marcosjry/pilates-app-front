@@ -1,0 +1,84 @@
+h2 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.text {
+    color: rgb(107 114 128 );
+}
+
+.list-container {
+    width: 100%;
+}
+
+.list-item {
+    margin-bottom: 15px;
+    padding: 15px 15px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 5px -3px rgba(0,0,0,0.1);
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+.customer-main-info {
+    display: flex;
+    gap: 20px;
+}
+
+p {
+    padding: 0;
+    margin: 0;
+}
+
+.Ativo, .Cancelado, .Finalizado, .Nenhum, .Pendente {
+    height: 30px;
+    padding: 0 10px;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 25px;
+    letter-spacing: 0.2px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+.Ativo {
+    color: rgb(0, 128, 0);
+    background-color: rgb(129, 255, 79);
+}
+
+.Ativo-border {
+    border-left: 5px solid rgb(129, 255, 79);
+}
+
+.Expirado {
+  color: rgb(129, 0, 0);
+  background-color: red;
+}
+
+.Expirado-Border {
+    border-left: 5px solid red;
+}
+
+.Pendente {
+  color: rgb(134, 87, 0);
+  background-color: rgb(255, 166, 0);
+}
+
+.Pendente-Border {
+    border-left: 5px solid rgb(255, 166, 0);
+}
+
+.Nenhum {
+    background-color: rgb(228, 228, 228);
+    color: rgba(0, 0, 0, 0.603);
+    font-style: italic;
+}
+
+.Nenhum-border {
+    border-left: 5px solid rgb(133, 133, 133);
+}
