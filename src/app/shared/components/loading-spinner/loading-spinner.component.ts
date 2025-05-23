@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { LoadingService } from '../services/loading.service';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-loading-spinner',
@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 })
 export class LoadingSpinnerComponent {
 
-  isLoading!: boolean
+  isLoading: boolean = false
   @Input() spinnerSize!: number
 
   constructor(private loadingService: LoadingService) {

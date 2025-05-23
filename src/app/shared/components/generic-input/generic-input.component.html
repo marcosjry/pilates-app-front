@@ -1,0 +1,42 @@
+<div class="custom-input-container">
+  <label *ngIf="label" [for]="label | lowercase">{{ label }}</label>
+
+  <div [ngSwitch]="type" class="type-class">
+    <select *ngSwitchCase="'select'"
+            [formControl]="internalFormControl"
+            (blur)="onBlur()"
+            [id]="label | lowercase"
+            [ngClass]="{ 'is-invalid': isInvalid }">
+      <option [ngValue]="null" [selected]="internalFormControl.value === null" disabled>
+        {{ placeholder || 'Selecione...' }} </option>
+      <option *ngFor="let option of options" [ngValue]="option.value">
+        {{ option.label }}
+      </option>
+    </select>
+
+    <input *ngSwitchDefault
+           [formControl]="internalFormControl"
+           [type]="type"
+           [placeholder]="placeholder"
+           [id]="label | lowercase"
+           (blur)="onBlur()"
+           [ngClass]="{ 'is-invalid': isInvalid }"
+    />
+  </div>
+
+  <div *ngIf="hasError('required')" class="error-message">
+    Este campo é obrigatório.
+  </div>
+  <div *ngIf="hasError('email')" class="error-message">
+    Por favor, insira um email válido.
+  </div>
+  <div *ngIf="hasError('minlength')" class="error-message">
+    Deve ter no mínimo {{ ngControl?.control?.errors?.['minlength']?.requiredLength }} caracteres.
+  </div>
+  <div *ngIf="hasError('maxlength')" class="error-message">
+    Deve ter no máximo {{ ngControl?.control?.errors?.['maxlength']?.requiredLength }} caracteres.
+  </div>
+  <div *ngIf="hasError('pattern')" class="error-message">
+    Formato inválido.
+  </div>
+</div>
