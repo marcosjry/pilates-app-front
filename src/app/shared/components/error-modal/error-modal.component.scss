@@ -1,0 +1,41 @@
+.error-modal-content {
+  text-align: center;
+  padding: 20px 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 16px;
+  color: red;
+}
+
+h2[mat-dialog-title] {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+  color: #6d0000;
+}
+
+mat-dialog-content {
+  p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #555; // Cor mais suave para a mensagem
+    margin: 0; // Remove margens padrão do <p>
+  }
+  margin-bottom: 24px; // Espaço antes dos botões
+}
+
+mat-dialog-actions {
+  padding: 0 !important; // Remove padding padrão se não desejar
+  width: 100%; // Faz o botão ocupar a largura se necessário (com o botão normal)
+
+  button {
+      min-width: 120px; // Largura mínima para o botão
+  }
+}
