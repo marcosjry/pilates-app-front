@@ -1,0 +1,10 @@
+<button type="submit" [className]="classButton" [ngClass]="{'background-light-blue': isLoading}"
+    (click)="onClick()">
+    <div *ngIf="isLoading" class="spinner-button">
+        <mat-spinner [diameter]="30"></mat-spinner>
+    </div>
+    <div class="text-icon" [ngClass]="{'disapear': isLoading}">
+        <mat-icon *ngIf="haveIcon">{{icon}}</mat-icon>
+        <p [className]="classText">{{text}}</p>
+    </div>
+</button>
