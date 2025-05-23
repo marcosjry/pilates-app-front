@@ -7,9 +7,10 @@ import { MatListModule } from '@angular/material/list';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { TranslateContractStatusPipe } from "../../../../pipes/translate-contract-status.pipe";
 import { FormatoDataExtensoPipe } from "../../../../pipes/formato-data-extenso.pipe";
-import { NoContentComponent } from '../../../../shared/no-content/no-content.component';
+import { NoContentComponent } from '../../../../shared/components/no-content/no-content.component';
 import { LoadingService } from '../../../../shared/services/loading.service';
-import { LoadingSpinnerComponent } from '../../../../shared/loading-spinner/loading-spinner.component';
+import { LoadingSpinnerComponent } from '../../../../shared/components/loading-spinner/loading-spinner.component';
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-expiring-contracts',
@@ -24,7 +25,19 @@ import { LoadingSpinnerComponent } from '../../../../shared/loading-spinner/load
     LoadingSpinnerComponent
 ],
   templateUrl: './expiring-contracts.component.html',
-  styleUrl: './expiring-contracts.component.scss'
+  styleUrl: './expiring-contracts.component.scss',
+  animations: [
+    trigger('listAnimation', [
+      transition('* => *', [ // Aplica a animação em cada mudança de estado da lista (incluindo a entrada inicial)
+        query(':enter', [ // Seleciona os elementos que estão entrando na lista
+          style({ opacity: 0, transform: 'translateY(20px)' }), // Estado inicial: invisível e levemente deslocado para baixo
+          stagger(200, [ // Aplica um pequeno atraso entre a animação de cada item
+            animate('0.4s ease-out', style({ opacity: 1, transform: 'translateY(0)' })) // Estado final: visível e na posição original
+          ])
+        ], { optional: true }) // Torna a query opcional para evitar erros se não houver itens entrando
+      ])
+    ])
+  ]
 })
 export class ExpiringContractsComponent {
   expiringContracts!: ExpiringContracts[]
