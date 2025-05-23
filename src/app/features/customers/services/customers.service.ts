@@ -4,6 +4,10 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { Customers } from '../models/customers';
 import { FilterParameters } from '../models/filter-parameters';
+import CustomerToCreate from '../../create-customer/models/customer-to-create';
+import { ErrorModalComponent } from '../../../shared/components/error-modal/error-modal.component';
+import { SuccessModalComponent } from '../../../shared/components/success-modal/success-modal.component';
+import { SharedService } from '../../../shared/services/shared.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +31,7 @@ export class CustomersService {
   private contractStatus!: string
   private classroomType!: string
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private shared: SharedService) {
     this.classroomType$.subscribe(classroomType => this.classroomType = classroomType);
     this.contractStatus$.subscribe(contractStatus => this.contractStatus = contractStatus);
     this.paymentType$.subscribe(paymentType => this.paymentType = paymentType);
@@ -60,5 +64,17 @@ export class CustomersService {
     this.paymentTypeSubject.next(parameters.paymentType);
   }
 
+  onCreateCustomer(customer: CustomerToCreate) {
+    const { classroomType, cpf, email, name, phone } = customer;
+    this.http.post(`${this.baseUrl}/aluno`, { classroomType, cpf, email, name, phone }).subscribe({
+      next: response => {
+        this.shared.openSuccessModal('Cliente', SuccessModalComponent);
+      },
+      error: error => {
+        console.log(error)
+        this.shared.openErrorModal('Cliente', ErrorModalComponent);
+      }
+    })
+  }
 }
 
