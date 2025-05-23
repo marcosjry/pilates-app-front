@@ -1,0 +1,53 @@
+<app-layout
+    [title]="'Adicione um Novo Cliente'">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+
+        <app-generic-input
+            formControlName="name"
+            label="Nome Completo"
+            placeholder="Digite o nome do cliente"
+            [submitted]="submitted"
+        ></app-generic-input>
+
+        <app-generic-input
+            formControlName="classroomType"
+            type="select"
+            label="Tipo de Aula"
+            placeholder="Seleciona um tipo de Aula"
+            [options]="classroomTypes" [submitted]="submitted"
+        ></app-generic-input>
+
+        <app-generic-input
+            formControlName="email"
+            type="email"
+            label="Email"
+            placeholder="seuemail@exemplo.com"
+            [submitted]="submitted"
+        ></app-generic-input>
+
+        <app-generic-input
+            formControlName="cpf"
+            type="cpf"
+            label="CPF"
+            placeholder="000.000.000-00 ou 00000000000"
+            [submitted]="submitted"
+        ></app-generic-input>
+
+        <app-generic-input
+            formControlName="phone"
+            type="celular"
+            label="Celular"
+            placeholder="(11)2345-6789 ou 1123456789"
+            [submitted]="submitted"
+        ></app-generic-input>
+
+        <app-custom-buttom 
+            [icon]="'save'"
+            [haveIcon]="true"
+            [text]="'Adicionar Cliente'"
+            [classButton]="'create-customer'"
+            [classText]="'light-text'"
+        ></app-custom-buttom>
+        
+    </form>
+</app-layout>
