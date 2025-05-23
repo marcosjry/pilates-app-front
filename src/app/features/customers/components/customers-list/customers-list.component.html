@@ -6,7 +6,7 @@
         <p class="text-bold">{{customer.name}}</p>
         <div class="customer-main-info">
           <p class="text">{{formatText(customer.classroomType)}}</p>
-          <p class="text">{{customer.paymentType}}</p>
+          <p class="text">{{ customer.paymentType | paymentFormato }}</p>
         </div>
       </div>
       <p [ngClass]="getStatusClass(customer.contractStatus)"

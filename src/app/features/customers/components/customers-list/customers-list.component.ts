@@ -4,7 +4,6 @@ import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 
-import { CustomersService } from '../../services/customers.service';
 import { SharedService } from '../../../../shared/services/shared.service';
 
 import {
@@ -17,7 +16,7 @@ import {
 } from '@angular/animations';
 
 import { TranslateContractStatusPipe } from "../../../../pipes/translate-contract-status.pipe";
-import { NoContentComponent } from '../../../../shared/no-content/no-content.component';
+import { PaymentFormatoPipe } from "../../../../pipes/payment-formato.pipe";
 
 @Component({
   selector: 'app-customers-list',
@@ -25,7 +24,8 @@ import { NoContentComponent } from '../../../../shared/no-content/no-content.com
     MatCardModule,
     CommonModule,
     MatListModule,
-    TranslateContractStatusPipe
+    TranslateContractStatusPipe,
+    PaymentFormatoPipe
 ],
   templateUrl: './customers-list.component.html',
   styleUrl: './customers-list.component.scss',
@@ -58,7 +58,7 @@ export class CustomersListComponent {
         ACTIVE: "Ativo",
         PENDING:"Pendente",
         CANCEL: "Cancelado",
-        EXPIRED:"Finalizado",
+        EXPIRED:"Expirado",
         null: "Nenhum"
     };
     const validacao = validacoes[contractStatus];
@@ -67,11 +67,11 @@ export class CustomersListComponent {
 
   getStatusBorderClass(contractStatus: string){
     const validacoes: { [key: string]: string} = {
-        ACTIVE: "Ativo-border",
-        PENDING:"Pendente-border",
-        CANCEL: "Cancelado-border",
-        EXPIRED:"Finalizado-border",
-        null: "Nenhum-border"
+      ACTIVE: "Ativo-border",
+      PENDING: "Pendente-border",
+      CANCEL: "Cancelado-border",
+      EXPIRED: "Expirado-border",
+      null: "Nenhum-border"
     };
     const validacao = validacoes[contractStatus];
     return validacao;
