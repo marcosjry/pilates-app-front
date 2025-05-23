@@ -7,8 +7,8 @@ import { FilterComponent } from './components/filter/filter.component';
 import { Customers } from './models/customers';
 import { NgIf } from '@angular/common';
 import { LoadingService } from '../../shared/services/loading.service';
-import { LoadingSpinnerComponent } from "../../shared/loading-spinner/loading-spinner.component";
-import { NoContentComponent } from '../../shared/no-content/no-content.component';
+import { LoadingSpinnerComponent } from "../../shared/components/loading-spinner/loading-spinner.component";
+import { NoContentComponent } from '../../shared/components/no-content/no-content.component';
 
 @Component({
   selector: 'app-customers',
