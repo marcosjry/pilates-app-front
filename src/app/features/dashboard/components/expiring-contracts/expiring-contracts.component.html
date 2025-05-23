@@ -2,7 +2,7 @@
     <mat-icon class="material-icons-outlined">priority_high</mat-icon>
     <h2>Contratos próximos a expirar</h2>
 </div>
-<mat-list>
+<mat-list [@listAnimation]="expiringContracts.length" *ngIf="!isLoading">
     <div *ngFor="let expiring of expiringContracts" class="list-container">
         <div class="list-item">
             <div class="hour-class">
