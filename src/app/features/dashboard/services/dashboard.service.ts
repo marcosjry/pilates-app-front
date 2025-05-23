@@ -41,7 +41,6 @@ export class DashboardService {
     this.http.get<TodayClasses[]>(`${this.baseUrl}/turma/today-classes`).subscribe({
       next: response => {
         this.todayClassesSubject.next(response);
-        console.log(response);
       },
       error: error => {
         console.log(error);

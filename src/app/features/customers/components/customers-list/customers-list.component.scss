@@ -15,14 +15,12 @@ h2 {
     margin-bottom: 15px;
     padding: 15px 15px;
     border-radius: 15px;
-    box-shadow: 0px 4px 5px -3px rgba(0,0,0,0.1);
+    box-shadow: 0px 4px 5px -3px rgba(0,0,0,0.15);
     background-color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
-
 
 .customer-main-info {
     display: flex;
@@ -34,7 +32,7 @@ p {
     margin: 0;
 }
 
-.Ativo, .Cancelado, .Finalizado, .Nenhum, .Pendente {
+.Ativo, .Expirado, .Finalizado, .Nenhum, .Pendente, .Cancelado {
     height: 30px;
     padding: 0 10px;
     font-weight: 500;
@@ -56,21 +54,21 @@ p {
 }
 
 .Expirado {
-  color: rgb(129, 0, 0);
-  background-color: red;
+  color: rgb(255, 255, 255);
+  background-color: rgba(255, 0, 0, 0.699);
 }
 
-.Expirado-Border {
-    border-left: 5px solid red;
+.Expirado-border {
+    border-left: 5px solid rgba(255, 0, 0, 0.699);
 }
 
 .Pendente {
-  color: rgb(134, 87, 0);
-  background-color: rgb(255, 166, 0);
+  color: rgb(161, 150, 113);
+  background-color: rgb(255, 230, 0);
 }
 
-.Pendente-Border {
-    border-left: 5px solid rgb(255, 166, 0);
+.Pendente-border {
+    border-left: 5px solid rgb(255, 230, 0);
 }
 
 .Nenhum {
@@ -81,4 +79,13 @@ p {
 
 .Nenhum-border {
     border-left: 5px solid rgb(133, 133, 133);
+}
+
+.Cancelado {
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+}
+
+.Cancelado-border {
+    border-left: 5px solid black;
 }

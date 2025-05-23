@@ -5,8 +5,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatIcon } from '@angular/material/icon';
 import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { SharedService } from '../../../../shared/services/shared.service';
-import { NoContentComponent } from '../../../../shared/no-content/no-content.component';
-import { LoadingSpinnerComponent } from '../../../../shared/loading-spinner/loading-spinner.component';
+import { NoContentComponent } from '../../../../shared/components/no-content/no-content.component';
+import { LoadingSpinnerComponent } from '../../../../shared/components/loading-spinner/loading-spinner.component';
 import { LoadingService } from '../../../../shared/services/loading.service';
 
 @Component({
