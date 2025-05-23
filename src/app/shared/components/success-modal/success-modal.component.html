@@ -1,0 +1,23 @@
+<div class="success-modal-content">
+
+  <h2 mat-dialog-title>{{ data.title }}</h2>
+  
+  <mat-icon class="success-icon">check_circle</mat-icon>
+
+  <mat-dialog-content>
+    <p>{{ data.message }}</p>
+  </mat-dialog-content>
+
+    <mat-dialog-actions align="center">
+    
+    <app-custom-buttom 
+        [text]="data.confirmText || 'Entendido'"
+        (click)="onConfirmClick()"
+        [classButton]="'create-customer modal-button'"
+        [classText]="'light-text'"
+    ></app-custom-buttom>
+    
+
+    </mat-dialog-actions>
+
+</div>
