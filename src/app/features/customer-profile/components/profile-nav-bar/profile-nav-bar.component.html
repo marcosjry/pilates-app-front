@@ -1,0 +1,29 @@
+<nav class="nav-container">
+    <ul class="nav-bar-wrapper">
+        <li class="nav-item" 
+            routerLinkActive="active" 
+            [routerLinkActiveOptions]="{exact: true}"
+            [routerLink]="['.']" 
+            [relativeTo]="route"
+            >Perfil
+        </li>
+
+        <li class="nav-item" 
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}"
+            [routerLink]="['contratos']" 
+            [relativeTo]="route"
+            >Contratos
+        </li>
+
+        <li class="nav-item" 
+            [routerLinkActiveOptions]="{exact: true}"
+            routerLinkActive="active"
+            [routerLink]="['aulas']" 
+            [relativeTo]="route"
+            >Aulas
+        </li>
+    </ul>
+    <div class="divider">
+    </div>
+</nav>
