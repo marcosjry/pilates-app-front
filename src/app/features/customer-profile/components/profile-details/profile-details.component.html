@@ -1,0 +1,66 @@
+<div class="profile-information">
+    <h3>Informação Pessoal</h3>
+    <div class="info-wrapper">
+        <div class="customer">
+            <div class="id-icon">
+                <mat-icon>person</mat-icon>
+                <p>Nome</p>
+            </div>
+            <p class=>{{customer.name}}</p>
+        </div>
+        <div class="customer">
+            <div class="id-icon">
+                <mat-icon>badge</mat-icon>
+                <p>CPF</p>
+            </div>
+            <p class=>{{customer.cpf}}</p>
+        </div>
+        <div class="customer">
+            <div class="id-icon">
+                <mat-icon>mail</mat-icon>
+                <p>E-mail</p>
+            </div>
+            <p class=>{{customer.email}}</p>
+        </div>
+        <div class="customer">
+            <div class="id-icon">
+                <mat-icon>call</mat-icon>
+                <p>Celular</p>
+            </div>
+            <p class=>{{customer.phone}}</p>
+        </div>
+    </div>
+</div>
+<div class="profile-information">
+    <h3>Informação de Aula</h3>
+    <div class="info-wrapper">
+        <div class="customer justify-end">
+            <p>Tipo de aula</p>
+            <p>{{ shared.capitalizeFirstLetter(contract.classroomType) }}</p>
+        </div>
+        <div class="customer justify-end">
+            <p>Método de Pagamento</p>
+            <p  [ngClass]="shared.getStatusClass(contract.paymentType)"
+                *ngIf="contract.paymentType !== null">
+                {{contract.paymentType | paymentFormato}}
+            </p>
+
+            <p [ngClass]="shared.getStatusClass(contract.paymentType)"
+                *ngIf="contract.paymentType === null">
+                Não Possui
+            </p>
+        </div>
+        <div class="customer justify-end">
+            <p>Status do Contrato</p>
+            <p [ngClass]="shared.getStatusClass(contract.status)"
+                *ngIf="contract.status !== null">
+                {{contract.status | translateContractStatus}}
+            </p>
+
+            <p [ngClass]="shared.getStatusClass(contract.status)"
+                *ngIf="contract.status === null">
+                Não Possui
+            </p>
+        </div>
+    </div>
+</div>
