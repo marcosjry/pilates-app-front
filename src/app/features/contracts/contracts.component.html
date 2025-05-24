@@ -1,0 +1,23 @@
+<app-layout 
+    [title]="'Contratos'">
+    <app-search 
+        [placeholder]="'Pesquise por contratos...'"
+        (onSearch)="onSearch($event)">
+    </app-search>
+    
+    <app-filter
+        [isCustomers]="false"
+        (onFilter)="onFilter($event)"
+        >
+    </app-filter>
+
+    <app-contracts-list 
+        [contracts]="contracts">
+    </app-contracts-list>
+
+    <app-no-content
+        *ngIf="contracts.length === 0"
+        [text]="'Nenhum Contrato até o momento'">
+    </app-no-content>
+
+</app-layout>
