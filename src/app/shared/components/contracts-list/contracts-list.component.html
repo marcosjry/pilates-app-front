@@ -1,0 +1,26 @@
+<mat-list> 
+        <div *ngFor="let contract of contracts" class="list-container">
+            <div class="list-item text-light">
+                <h3>{{ contract.customerName }}</h3>
+                <div class="content-align">
+                    <div class="date-info">
+                        <mat-icon>event_available</mat-icon>
+                        <p>{{ contract.initDate | formatoDataExtenso: 'dd \'de\' MMMM\',\' yyyy' }}</p>
+                        <p>-</p>
+                        <p>{{ contract.endDate | formatoDataExtenso: 'dd \'de\' MMMM\',\' yyyy' }}</p>
+                    </div>
+                    <div class="status-price">
+                        <p [ngClass]="shared.getStatusClass(contract.contractStatus)">
+                            {{contract.contractStatus | translateContractStatus}}
+                        </p>
+                        <p>R$ {{contract.price}}</p>
+                    </div>
+                </div> 
+                <div class="paymentType">
+                    <p>Tipo de Pagamento</p>
+                    <p>|</p>
+                    <p>{{contract.paymentType | paymentFormato}}</p>
+                </div>
+            </div>
+        </div>
+</mat-list>

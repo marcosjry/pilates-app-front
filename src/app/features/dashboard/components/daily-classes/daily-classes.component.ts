@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DashboardService } from '../../services/dashboard.service';
 import { TodayClasses } from '../../models/today-classes';
 import { MatListModule } from '@angular/material/list';
@@ -8,6 +8,7 @@ import { SharedService } from '../../../../shared/services/shared.service';
 import { NoContentComponent } from '../../../../shared/components/no-content/no-content.component';
 import { LoadingSpinnerComponent } from '../../../../shared/components/loading-spinner/loading-spinner.component';
 import { LoadingService } from '../../../../shared/services/loading.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-daily-classes',
@@ -22,24 +23,40 @@ import { LoadingService } from '../../../../shared/services/loading.service';
   templateUrl: './daily-classes.component.html',
   styleUrl: './daily-classes.component.scss'
 })
-export class DailyClassesComponent {
+export class DailyClassesComponent implements OnInit,OnDestroy {
 
   todayClasses!: TodayClasses[];
   isLoading: boolean = false;
+  private destroy$ = new Subject<void>();
 
   constructor(
     private service: DashboardService, 
     private datePipe: DatePipe, 
     private shared: SharedService,
     private loading: LoadingService) {
-    this.service.todayClasses$.subscribe(value => this.todayClasses = value);
-    this.loading.isLoading$.subscribe(value => this.isLoading = value);
+    
+  }
+  ngOnInit(): void {
+    this.service.todayClasses$.pipe(
+      takeUntil(this.destroy$)).subscribe(
+        value => this.todayClasses = value
+      );
+    this.loading.isLoading$.pipe(
+      takeUntil(this.destroy$)).subscribe(
+        value => this.isLoading = value
+      );
 
     this.loading.isLoadingSubject.next(true);
     setTimeout(() => {
       this.loading.isLoadingSubject.next(false);
       this.service.getTodayClasses();
     }, 1500)
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+    console.log("ProfileDetailsComponent destruído e inscrição cancelada.");
   }
 
   formatTime12h(time: string): string | null {

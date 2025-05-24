@@ -8,40 +8,56 @@
     
     <div class="filters-panel" [class.expanded]="showFilters">
         <form [formGroup]="form">
-            <h4>Tipo de Aula</h4>
-            <div class="custom-radio-group">
-                <mat-radio-group formControlName="classroomType">
-                    <div *ngFor="let type of roomTypeOptions" class="option-container">
-                        <label class="custom-radio-label" [class.selected]="form.value.classroomType === type.value">
-                            <input type="radio" [value]="type.value" formControlName="classroomType">
-                            <span class="label-text">{{ type.label }}</span>
-                        </label>
-                    </div>
-                </mat-radio-group>
+            <div *ngIf="isCustomers">
+                <h4>Tipo de Aula</h4>
+                <div class="custom-radio-group">
+                    <mat-radio-group formControlName="classroomType">
+                        <div *ngFor="let type of roomTypeOptions" class="option-container">
+                            <label class="custom-radio-label" [class.selected]="form.value.classroomType === type.value">
+                                <input type="radio" [value]="type.value" formControlName="classroomType">
+                                <span class="label-text">{{ type.label }}</span>
+                            </label>
+                        </div>
+                    </mat-radio-group>
+                </div>
+    
+                <h4>Forma de Pagamento</h4>
+                <div class="custom-radio-group">
+                    <mat-radio-group formControlName="paymentType">
+                        <div *ngFor="let type of paymentTypeOptions" class="option-container">
+                            <label class="custom-radio-label" [class.selected]="form.value.paymentType === type.value">
+                                <input type="radio" [value]="type.value" formControlName="paymentType">
+                                <span class="label-text">{{ type.label }}</span>
+                            </label>
+                        </div>
+                    </mat-radio-group>
+                </div>
+    
+                <h4>Status do Contrato</h4>
+                <div class="custom-radio-group">
+                    <mat-radio-group formControlName="contractStatus">
+                        <div *ngFor="let status of contractStatusOptions" class="option-container">
+                            <label class="custom-radio-label" [class.selected]="form.value.contractStatus === status.value">
+                                <input type="radio" [value]="status.value" formControlName="contractStatus">
+                                <span class="label-text">{{ status.label }}</span>
+                            </label>
+                        </div>
+                    </mat-radio-group>
+                </div>
             </div>
 
-            <h4>Forma de Pagamento</h4>
-            <div class="custom-radio-group">
-                <mat-radio-group formControlName="paymentType">
-                    <div *ngFor="let type of paymentTypeOptions" class="option-container">
-                        <label class="custom-radio-label" [class.selected]="form.value.paymentType === type.value">
-                            <input type="radio" [value]="type.value" formControlName="paymentType">
-                            <span class="label-text">{{ type.label }}</span>
-                        </label>
-                    </div>
-                </mat-radio-group>
-            </div>
-
-            <h4>Status do Contrato</h4>
-            <div class="custom-radio-group">
-                <mat-radio-group formControlName="contractStatus">
-                    <div *ngFor="let status of contractStatusOptions" class="option-container">
-                        <label class="custom-radio-label" [class.selected]="form.value.contractStatus === status.value">
-                            <input type="radio" [value]="status.value" formControlName="contractStatus">
-                            <span class="label-text">{{ status.label }}</span>
-                        </label>
-                    </div>
-                </mat-radio-group>
+            <div *ngIf="!isCustomers">
+                <h4>Status do Contrato</h4>
+                <div class="custom-radio-group">
+                    <mat-radio-group formControlName="contractStatus">
+                        <div *ngFor="let status of contractStatusOptions" class="option-container">
+                            <label class="custom-radio-label" [class.selected]="form.value.contractStatus === status.value">
+                                <input type="radio" [value]="status.value" formControlName="contractStatus">
+                                <span class="label-text">{{ status.label }}</span>
+                            </label>
+                        </div>
+                    </mat-radio-group>
+                </div>
             </div>
         </form>
     </div>

@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIcon } from '@angular/material/icon';
 import { Customers } from '../../models/customers';
+import { Subject, takeUntil } from 'rxjs';
 
 
 @Component({
@@ -22,8 +23,9 @@ import { Customers } from '../../models/customers';
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.scss'
 })
-export class FilterComponent {
-  showFilters = false;
+export class FilterComponent implements OnInit, OnDestroy {
+
+  @Input() isCustomers: boolean = true;
 
   roomTypeOptions = [
     { label: 'Todos', value: '' },
@@ -47,8 +49,10 @@ export class FilterComponent {
     { label: 'Expirado', value: 'EXPIRED' },
   ];
 
+  showFilters = false;
   @Output() onFilter: EventEmitter<Customers> = new EventEmitter();
   form: FormGroup;
+  private destroy$ = new Subject<void>();
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
@@ -59,10 +63,9 @@ export class FilterComponent {
   }
 
   ngOnInit() {
-    // Monitorar alterações nos valores do formulário
-    this.form.valueChanges.subscribe(values => {
-      this.onFilter.emit(values);
-      // Aqui você pode chamar métodos para filtrar dados com base nas seleções
+    this.form.valueChanges.pipe(
+      takeUntil(this.destroy$)).subscribe(values => {
+        this.onFilter.emit(values)
     });
   }
 
@@ -70,12 +73,9 @@ export class FilterComponent {
     this.showFilters = !this.showFilters;
   }
 
-  // Método opcional para verificar se há filtros ativos
-  hasActiveFilters(): boolean {
-    const values = this.form.value;
-    return values.roomType !== '' || 
-           values.paymentType !== '' || 
-           values.contractStatus !== '';
+  ngOnDestroy() { // <--- Implemente o método
+    this.destroy$.next();
+    this.destroy$.complete();
+    console.log("FilterComponent destruído e inscrição cancelada.");
   }
-
 }
