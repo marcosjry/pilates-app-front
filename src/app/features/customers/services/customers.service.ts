@@ -68,11 +68,18 @@ export class CustomersService {
     const { classroomType, cpf, email, name, phone } = customer;
     this.http.post(`${this.baseUrl}/aluno`, { classroomType, cpf, email, name, phone }).subscribe({
       next: response => {
-        this.shared.openSuccessModal('Cliente', SuccessModalComponent);
+        this.shared.openSuccessModal(
+          'Cliente Salvo com Sucesso', 
+          SuccessModalComponent, 
+          'O Cliente informado foi criado com sucesso.');
       },
       error: error => {
         console.log(error)
-        this.shared.openErrorModal('Cliente', ErrorModalComponent);
+        this.shared.openErrorModal(
+          'Erro ao Criar Cliente.', 
+          ErrorModalComponent, 
+          'Ocorreu um erro ao tentar cria o cliente informado. Tente novamente.'
+        );
       }
     })
   }
