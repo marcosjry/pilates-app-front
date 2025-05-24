@@ -1,7 +1,7 @@
 
 <mat-list [@listAnimation]="customers.length"> 
   <div *ngFor="let customer of customers" class="list-container">
-    <div class="list-item" [ngClass]="getStatusBorderClass(customer.contractStatus)">
+    <div class="list-item" [ngClass]="shared.getStatusBorderClass(customer.contractStatus)" (click)="onClick(customer)">
       <div class="hour-class">
         <p class="text-bold">{{customer.name}}</p>
         <div class="customer-main-info">
@@ -9,11 +9,11 @@
           <p class="text">{{ customer.paymentType | paymentFormato }}</p>
         </div>
       </div>
-      <p [ngClass]="getStatusClass(customer.contractStatus)"
+      <p [ngClass]="shared.getStatusClass(customer.contractStatus)"
          *ngIf="customer.paymentType === null">
         Não Possui Contrato
       </p>
-      <p [ngClass]="getStatusClass(customer.contractStatus)"
+      <p [ngClass]="shared.getStatusClass(customer.contractStatus)"
          *ngIf="customer.paymentType !== null">
         {{ customer.contractStatus | translateContractStatus }}
       </p>

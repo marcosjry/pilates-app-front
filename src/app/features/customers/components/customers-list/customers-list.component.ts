@@ -17,6 +17,7 @@ import {
 
 import { TranslateContractStatusPipe } from "../../../../pipes/translate-contract-status.pipe";
 import { PaymentFormatoPipe } from "../../../../pipes/payment-formato.pipe";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customers-list',
@@ -46,37 +47,14 @@ export class CustomersListComponent {
   
   @Input() customers: Customers[] = []
 
-  constructor(private shared: SharedService) {
+  constructor(public shared: SharedService, private router: Router) {
   }
 
   formatText(text: string) {
     return this.shared.capitalizeFirstLetter(text);
   }
 
-  getStatusClass(contractStatus: string){
-    const validacoes: { [key: string]: string} = {
-        ACTIVE: "Ativo",
-        PENDING:"Pendente",
-        CANCEL: "Cancelado",
-        EXPIRED:"Expirado",
-        null: "Nenhum"
-    };
-    const validacao = validacoes[contractStatus];
-    return validacao;
-  }
-
-  getStatusBorderClass(contractStatus: string){
-    const validacoes: { [key: string]: string} = {
-      ACTIVE: "Ativo-border",
-      PENDING: "Pendente-border",
-      CANCEL: "Cancelado-border",
-      EXPIRED: "Expirado-border",
-      null: "Nenhum-border"
-    };
-    const validacao = validacoes[contractStatus];
-    return validacao;
+  onClick(customer: Customers) {
+    this.router.navigate([`/cliente/${customer.id}`])
   }
 }
-
-
-
