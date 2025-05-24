@@ -27,10 +27,34 @@ export class SharedService {
     return formatter.format(date);
   }
 
-  openErrorModal(sourceOp: string, modal: ComponentType<ErrorModalComponent>, ) {
+  getStatusClass(contractStatus: string){
+    const validacoes: { [key: string]: string} = {
+        ACTIVE: "Ativo",
+        PENDING:"Pendente",
+        CANCEL: "Cancelado",
+        EXPIRED:"Expirado",
+        null: "Nenhum"
+    };
+    const validacao = validacoes[contractStatus];
+    return validacao;
+  }
+
+  getStatusBorderClass(contractStatus: string){
+    const validacoes: { [key: string]: string} = {
+      ACTIVE: "Ativo-border",
+      PENDING: "Pendente-border",
+      CANCEL: "Cancelado-border",
+      EXPIRED: "Expirado-border",
+      null: "Nenhum-border"
+    };
+    const validacao = validacoes[contractStatus];
+    return validacao;
+  }
+
+  openErrorModal(sourceOp: string, modal: ComponentType<ErrorModalComponent>, message: string) {
     const errorData: ModalData = {
-      title: `Falha ao Criar ${sourceOp}`,
-      message: 'Não foi possível salvar os dados. Verifique os campos e tente novamente.',
+      title: `${sourceOp}`,
+      message: `${message}`,
       confirmText: 'OK'
     };
     this.matDialog.open(modal, {
@@ -41,10 +65,10 @@ export class SharedService {
     })
   }
 
-  openSuccessModal(sourceOp: string, modal: ComponentType<SuccessModalComponent>, ) {
+  openSuccessModal(sourceOp: string, modal: ComponentType<SuccessModalComponent>, message: string) {
     const successData: ModalData = {
-      title: `${sourceOp} criado com Sucesso!`,
-      message: 'O Cliente foi salvo com sucesso.',
+      title: `${sourceOp}`,
+      message: `${message}`,
       confirmText: 'OK'
     };
     this.matDialog.open(modal, {
