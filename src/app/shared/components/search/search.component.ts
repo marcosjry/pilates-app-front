@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { GenericInputComponent } from '../generic-input/generic-input.component';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { NgIf } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
