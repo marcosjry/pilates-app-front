@@ -1,0 +1,60 @@
+<div class="create-panel" [class.expanded]="showCreation">
+    <div class="back">
+        <mat-icon (click)="toggleFilters()">close</mat-icon>
+        <h3>Crie um Contrato</h3>
+    </div>
+    <form [formGroup]="form" >
+        
+        <app-generic-input
+            formControlName="paymentType"
+            type="select"
+            label="Tipo de Pagamento"
+            placeholder="Selecione um tipo de Pagamento"
+            [options]="paymentTypes" [submitted]="submitted"
+        ></app-generic-input>
+
+        <app-generic-input
+            formControlName="price"
+            type="number"
+            label="Preço"
+            placeholder="300"
+            [submitted]="submitted"
+        ></app-generic-input>
+
+        <app-generic-input
+            formControlName="initDate"
+            label="Data de Início"
+            type="date"
+            placeholder="Escolha a data"
+            [submitted]="submitted">
+        </app-generic-input>
+        
+        <app-generic-input
+            formControlName="contractStatus"
+            type="select"
+            label="Status"
+            placeholder="Selecione um tipo de Status"
+            [options]="contractStatusOptions" [submitted]="submitted"
+        ></app-generic-input>
+
+        <app-custom-buttom 
+            (click)="onSubmit()"
+            *ngIf="showCreation"
+            [icon]="'save'"
+            [haveIcon]="true"
+            [text]="'Adicionar Contrato'"
+            [classButton]="'create-customer'"
+            [classText]="'light-text'"
+        ></app-custom-buttom>
+            
+    </form>
+</div>
+<app-custom-buttom
+        (click)="toggleFilters()"
+        *ngIf="!showCreation"
+        [icon]="'add'"
+        [haveIcon]="true"
+        [text]="'Criar Novo Contrato'"
+        [classButton]="'create-customer'"
+        [classText]="'light-text'"
+></app-custom-buttom>
