@@ -3,9 +3,10 @@
   <div *ngFor="let customer of customers" class="list-container">
     <div class="list-item" [ngClass]="shared.getStatusBorderClass(customer.contractStatus)" (click)="onClick(customer)">
       <div class="hour-class">
-        <p class="text-bold">{{customer.name}}</p>
+        <h4>{{customer.name}}</h4>
         <div class="customer-main-info">
-          <p class="text">{{formatText(customer.classroomType)}}</p>
+          <p class="text">{{ formatText(customer.classroomType) }}</p>
+          <p class="text-divider">|</p>
           <p class="text">{{ customer.paymentType | paymentFormato }}</p>
         </div>
       </div>
