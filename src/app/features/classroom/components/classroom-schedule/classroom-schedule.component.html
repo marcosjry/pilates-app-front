@@ -1,0 +1,33 @@
+<app-date-select (dateSelected)="onDateChange($event)"></app-date-select>
+
+<app-classroom-time-slot (onTimeFilter)="onFilterHour($event)"></app-classroom-time-slot>
+
+<app-search (onSearch)="onSearch($event)"></app-search>
+
+<app-filter
+        [type]="'schedule-classroom'"
+        (onFilter)="onFilter($event)">
+</app-filter>
+
+<app-classroom-present-customers 
+    *ngIf="filteredCustomers.length > 0"
+    [isOnClassroomPage]="false"
+    [text]="'Selecione os Alunos'"
+    [customers]="filteredCustomers" 
+    [initialSelectedIds]="selectedCustomerIds"
+    (selectionChange)="handleSelectionChange($event)">
+</app-classroom-present-customers>
+
+<app-custom-buttom
+        (click)="onSubmit()"
+        [icon]="'save'"
+        [haveIcon]="true"
+        [text]="'Salvar Aula'"
+        [classButton]="'create-customer'"
+        [classText]="'light-text'">
+</app-custom-buttom>
+
+<app-no-content  
+    *ngIf="filteredCustomers.length === 0"
+    [text]="'Nenhum Cliente encontrado.'">
+</app-no-content>

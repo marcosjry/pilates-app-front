@@ -1,0 +1,87 @@
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+/* Container principal para a lista de pílulas */
+.pill-list-container {
+  display: flex;
+  flex-direction: column; 
+  flex-wrap: wrap;
+  margin-bottom: 25px; 
+  padding: 10px 0; 
+  gap: 5px;
+}
+
+input {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #e0e0e0 !important;
+}
+
+.customer-info {
+  margin-left: 10px;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+}
+
+.pill-item label {
+  align-items: center;
+  display: flex; /* Faz o label se comportar como um bloco, mas na linha */
+  padding: 8px 18px; /* Espaçamento interno da pílula */
+  color: #000000; /* Cor do texto cinza escuro */
+  cursor: pointer; /* Indica que é clicável */
+  font-weight: 500; 
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out; /* Transição suave */
+  border: 1px solid #e0e0e0; /* Borda sutil */
+  font-size: 14px;
+  user-select: none; /* Impede a seleção de texto ao clicar */
+}
+
+/* Estilo do label quando o mouse passa por cima */
+.pill-item label:hover {
+  background-color: #e5e5e5; /* Um cinza um pouco mais escuro no hover */
+}
+
+input.selected {
+  background-color:#0033ff ;
+}
+
+/* Estilo do label quando selecionado (classe 'selected' aplicada via [ngClass]) */
+.pill-item label.selected {
+  background-color:#b8c6ff ;/* Azul forte (ajuste para o azul exato da sua imagem) */
+  border-color: #acbdff; /* Borda da mesma cor do fundo */
+}
+
+/* Estilo básico para o botão de envio */
+.submit-button {
+  padding: 10px 25px;
+  background-color: #4466F2; /* Mesmo azul ou um verde */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 15px;
+  transition: opacity 0.2s ease;
+}
+
+.submit-button:hover {
+  opacity: 0.9;
+}
+
+.submit-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Estilo para o H3 (opcional, para combinar) */
+h3 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
