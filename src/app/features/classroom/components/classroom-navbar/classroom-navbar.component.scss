@@ -1,0 +1,76 @@
+.nav-container {
+  display: flex;
+  z-index: 1000;
+}
+/* Remova width: 100% daqui */
+ul {
+  width: 100%;
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-bar-wrapper {
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+
+.nav-item {
+    padding: 15px;
+    display: flex;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+    text-align: center;
+    white-space: nowrap; /* Impede que o texto quebre, mantendo a largura mínima */
+}
+
+.divider {
+  display: flex;
+  flex-grow: 1; /* Garante que ele cresça (flex: 1 é um atalho que inclui isso) */
+  background-color: #f9fafb;
+}
+
+/* O resto do seu CSS permanece igual */
+.nav-item, .divider {
+  border-bottom: 2px solid rgb(223, 221, 241);
+}
+
+.nav-item:hover {
+  border-bottom: 2px solid rgb(105, 105, 105);
+  color: rgb(105, 105, 105);
+}
+
+.nav-item.active {
+  border-bottom: 2px solid rgb(0, 18, 179);
+  color: rgb(0, 18, 179);
+  z-index: 100;
+}
+
+p {
+
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    font-weight: 500;
+  margin: 4px 0 0;
+  font-size: 17px;
+  color: #757575;
+  transition: color 0.3s ease;
+}
+
+/* Adiciona um espaço de respiro na parte inferior da página para compensar a nav bar */
+body {
+  padding-bottom: 80px;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 480px) {
+  .nav-item p {
+    font-size: 11px;
+  }
+  
+}

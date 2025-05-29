@@ -1,0 +1,19 @@
+<nav class="nav-container">
+    <ul class="nav-bar-wrapper">
+        <li class="nav-item" 
+            routerLinkActive="active" 
+            [routerLinkActiveOptions]="{exact: true}"
+            [routerLink]="['.']" 
+            [relativeTo]="route"
+            >Aulas
+        </li>
+
+        <li class="nav-item" 
+            [routerLinkActiveOptions]="{exact: true}"
+            routerLinkActive="active"
+            [routerLink]="['agendamento']" 
+            [relativeTo]="route"
+            >Agendamento
+        </li>
+    </ul>
+</nav>
