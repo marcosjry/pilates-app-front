@@ -11,14 +11,15 @@ import { TranslateContractStatusPipe } from "../../../../pipes/translate-contrac
 import { PaymentFormatoPipe } from "../../../../pipes/payment-formato.pipe";
 import { Subject, takeUntil } from 'rxjs';
 import { ContractsListComponent } from "../../../../shared/components/contracts-list/contracts-list.component";
+import { CreateContractComponent } from '../create-contract/create-contract.component';
 
 @Component({
   selector: 'app-profile-contracts',
   imports: [
-    CustomButtomComponent,
     MatListModule,
     CommonModule,
-    ContractsListComponent
+    ContractsListComponent,
+    CreateContractComponent
 ],
   templateUrl: './profile-contracts.component.html',
   styleUrl: './profile-contracts.component.scss'
