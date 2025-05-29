@@ -1,0 +1,28 @@
+<app-date-select (dateSelected)="onDateChange($event)"></app-date-select>
+
+<app-classroom-time-slot (onTimeFilter)="onFilterHour($event)"></app-classroom-time-slot>
+
+<h4>Alunos agendados</h4> 
+<div class="pill-list-container" formArrayName="itensSelecionados">
+    <div *ngFor="let customer of presentCustomers; let i = index" class="pill-item"> 
+        <label class="selected">
+            <div class="display-info">
+                <div class="info">
+                    <mat-icon>check</mat-icon>
+                    <div class="customer-info">
+                        <span>{{ customer.name }}</span> 
+                        <span class="roomType">{{ shared.capitalizeFirstLetter(customer.classroomType) }}</span> 
+                    </div>   
+                </div>
+                <div class="action" (click)="onDelete(customer.id)">
+                    <mat-icon>delete</mat-icon>
+                </div>
+            </div>
+        </label>
+    </div>
+</div>
+
+<app-no-content 
+    *ngIf="presentCustomers.length === 0"
+    [text]="'Nenhum Cliente encontrado, tente selecionar uma nova data ou horário.'">
+</app-no-content>

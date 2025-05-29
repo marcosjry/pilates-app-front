@@ -1,0 +1,97 @@
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+/* Container principal para a lista de pílulas */
+.pill-list-container {
+  display: flex;
+  flex-direction: column; 
+  flex-wrap: wrap;
+  margin-bottom: 25px; 
+  padding: 15px; 
+  gap: 5px;
+}
+
+input {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #e0e0e0 !important;
+}
+
+.customer-info {
+  margin-left: 10px;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+}
+
+.pill-item label {
+  align-items: center;
+  display: flex; /* Faz o label se comportar como um bloco, mas na linha */
+  padding: 8px 18px; /* Espaçamento interno da pílula */
+  color: #000000; /* Cor do texto cinza escuro */
+  font-weight: 500; 
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out; /* Transição suave */
+  border: 1px solid #e0e0e0; /* Borda sutil */
+  font-size: 14px;
+  user-select: none; /* Impede a seleção de texto ao clicar */
+}
+
+input.selected {
+  background-color:#0033ff ;
+}
+
+.roomType {
+    width: 50px;
+    display: flex;
+    border: 1px solid #8da2ff;
+    background-color: #8da2ff;
+    justify-content: center;
+    color: rgb(255, 255, 255);
+    border-radius: 15px;
+    font-size: 13px;
+    padding: 2px;
+}
+
+.display-info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.action mat-icon {
+  cursor: pointer;
+  font-size: 25px;
+  width: 25px;
+  padding: 5px;
+  height: 25px;
+  color: rgb(175, 20, 0);
+  border-radius: 50%;
+
+}
+
+.info mat-icon {
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+    border-color: #ffffff; /* Borda da mesma cor do fundo */
+}
+
+/* Estilo do label quando selecionado (classe 'selected' aplicada via [ngClass]) */
+.pill-item label.selected {
+  box-shadow: 0px 4px 5px -3px rgba(0,0,0,0.15);
+  //background-color:#ebfbfc ;/* Azul forte (ajuste para o azul exato da sua imagem) */
+  border-color: #8da2ff;
+  
+}
