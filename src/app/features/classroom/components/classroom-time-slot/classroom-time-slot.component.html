@@ -1,0 +1,15 @@
+<div class="filter-container"> 
+    <form [formGroup]="form">
+        <h4>Selecione um Horário</h4>
+        <div class="custom-radio-group">
+            <mat-radio-group formControlName="startTime">
+                <div *ngFor="let hours of hoursAvailable" class="option-container">
+                    <label class="custom-radio-label" [class.selected]="form.value.startTime === hours.startTime">
+                        <input type="radio" [value]="hours.startTime" formControlName="startTime">
+                        <span class="label-text">{{ hours.startTime }}</span>
+                    </label>
+                </div>
+            </mat-radio-group>
+        </div>
+    </form>
+</div>
