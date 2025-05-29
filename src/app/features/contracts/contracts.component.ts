@@ -41,6 +41,7 @@ export class ContractsComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+    this.service.onResetProperties();
   }
 
   onSearch(query: string) {

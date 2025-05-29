@@ -7,6 +7,9 @@ import { ProfileDetailsComponent } from './features/customer-profile/components/
 import { ProfileContractsComponent } from './features/customer-profile/components/profile-contracts/profile-contracts.component';
 import { ProfileClassesComponent } from './features/customer-profile/components/profile-classes/profile-classes.component';
 import { ContractsComponent } from './features/contracts/contracts.component';
+import { ClassroomComponent } from './features/classroom/classroom.component';
+import { ClassroomClassesComponent } from './features/classroom/components/classroom-classes/classroom-classes.component';
+import { ClassroomScheduleComponent } from './features/classroom/components/classroom-schedule/classroom-schedule.component';
 
 export const routes: Routes = [
 
@@ -39,9 +42,24 @@ export const routes: Routes = [
             component: ProfileClassesComponent, // Componente para a aba "Aulas"
         }
     ]
-  },
-  {
-    path: 'contratos',
-    component: ContractsComponent
+    },
+    {
+        path: 'contratos',
+        component: ContractsComponent
+    },
+    {
+        path: 'turmas',
+        component: ClassroomComponent,
+        // O componente pai que contém app-layout e app-profile-layout
+        children: [ // Rotas filhas serão renderizadas no router-outlet do ProfileLayoutComponent
+        {
+            path: '', // Rota padrão (ex: "Perfil")
+            component: ClassroomClassesComponent,
+        },
+        {
+            path: 'agendamento', // Rota para "Contratos"
+            component: ClassroomScheduleComponent, // Componente para a aba "Contratos"
+        }
+    ]
   }
 ];

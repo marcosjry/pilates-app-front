@@ -23,7 +23,7 @@ import { Subject, takeUntil } from 'rxjs';
   templateUrl: './daily-classes.component.html',
   styleUrl: './daily-classes.component.scss'
 })
-export class DailyClassesComponent implements OnInit,OnDestroy {
+export class DailyClassesComponent implements OnInit, OnDestroy {
 
   todayClasses!: TodayClasses[];
   isLoading: boolean = false;

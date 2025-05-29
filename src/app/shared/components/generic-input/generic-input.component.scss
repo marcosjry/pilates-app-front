@@ -12,32 +12,31 @@
 
   div[ngSwitch] {
     width: 100%;
-    position: relative;
+    position: relative; // Mantém a posição relativa aqui
   }
 
+  // Estilos base para input e select
   input,
   select {
-    display: block; 
-    width: 100%;    
-    padding: 0.75rem; 
-    font-size: 1rem;  
-    font-weight: 400; 
-    line-height: 1.5; 
-    color: #495057;  
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
     background-color: #fff;
-    background-clip: padding-box; 
-    border: 1px solid #ccc;    
-    border-radius: 15px;      
-    box-sizing: border-box; 
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-sizing: border-box;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
-    
     &:focus {
       border-color: #007bff;
       outline: 0;
       box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
     }
-
 
     &.is-invalid {
       border-color: #dc3545;
@@ -48,37 +47,40 @@
     }
 
     &:disabled {
-        position: relative;
-        background-color: #e9ecef; 
-        opacity: 1;
-        cursor: not-allowed; 
+      position: relative;
+      background-color: #e9ecef;
+      opacity: 1;
+      cursor: not-allowed;
     }
   }
 
-  select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+  .datepicker-wrapper {
+    position: relative; 
 
-    background-repeat: no-repeat;
-    background-position: right 0.75rem center; 
-    background-size: 16px 12px; 
-
-    padding-right: 2.5rem;
-
-    &:not([size]):not([multiple]) {
-        height: calc(1.5em + 1.5rem + 2px);
+    
+    input[matInput] {
+      padding-right: 3rem; 
     }
 
 
-    &:invalid,
-    &:-moz-focusring:invalid {
-        color: #6c757d;
-        text-shadow: none;
-    }
+    mat-datepicker-toggle {
+      position: absolute; 
+      top: 50%;          
+      right: 0.5rem;      
+      transform: translateY(-50%); 
+      width: 40px;        
+      height: 40px;       
+      ::ng-deep button.mat-icon-button {
+         background-color: transparent !important;
+         border: none !important;
+         outline: none !important;
+         box-shadow: none !important;
+         color: #6c757d;
 
-    option {
-        color: #495057;
+         &:hover {
+           background-color: rgba(0, 0, 0, 0.04) !important;
+         }
+      }
     }
   }
 

@@ -83,5 +83,13 @@ export class CustomersService {
       }
     })
   }
+
+  onResetProperties() {
+    this.customersSubject.next([]);
+    this.classroomSubject.next('');
+    this.contractStatusSubject.next('');
+    this.paymentTypeSubject.next('');
+    this.nameSubject.next('');
+  }
 }
 

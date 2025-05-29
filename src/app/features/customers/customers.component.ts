@@ -71,6 +71,7 @@ export class CustomersComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+    this.service.onResetProperties();
     console.log("CustomersComponent destruído e inscrições canceladas.");
   }
 }

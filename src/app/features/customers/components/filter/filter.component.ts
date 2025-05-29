@@ -25,22 +25,22 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class FilterComponent implements OnInit, OnDestroy {
 
-  @Input() isCustomers: boolean = true;
-
+  
   roomTypeOptions = [
     { label: 'Todos', value: '' },
     { label: 'Pilates', value: 'PILATES' },
     { label: 'Hidro', value: 'HIDRO' },
   ];
-
+  
   paymentTypeOptions = [
     { label: 'Todos', value: '' },
     { label: 'Dinheiro', value: 'CASH' },
     { label: 'Gympass', value: 'GYMPASS' },
     { label: 'Cartão de Crédito', value: 'CC' },
     { label: 'Cartão de Débito', value: 'CD' },
+    { label: 'Pix', value: 'PIX' },
   ];
-
+  
   contractStatusOptions = [
     { label: 'Todos', value: '' },
     { label: 'Ativo', value: 'ACTIVE' },
@@ -48,12 +48,13 @@ export class FilterComponent implements OnInit, OnDestroy {
     { label: 'Cancelado', value: 'CANCEL' },
     { label: 'Expirado', value: 'EXPIRED' },
   ];
-
-  showFilters = false;
+  
+  @Input() type = 'customers';
   @Output() onFilter: EventEmitter<Customers> = new EventEmitter();
   form: FormGroup;
+  showFilters = false;
   private destroy$ = new Subject<void>();
-
+  
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       classroomType: [''],
