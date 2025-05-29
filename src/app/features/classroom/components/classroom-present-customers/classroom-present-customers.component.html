@@ -1,0 +1,14 @@
+<form [formGroup]="form">
+    <h4>{{text}}</h4> 
+    <div class="pill-list-container" formArrayName="itensSelecionados">
+        <div *ngFor="let item of customers; let i = index" class="pill-item"> 
+            <label [ngClass]="{'selected': itensSelecionadosFormArray.controls[i].value}">
+                <input type="checkbox" [formControlName]="i" > 
+                <div class="customer-info">
+                    <span>{{ item.name }}</span> 
+                    <span>{{ shared.capitalizeFirstLetter(item.classroomType)  }}</span> 
+                </div>
+            </label>
+        </div>
+    </div>
+</form>
