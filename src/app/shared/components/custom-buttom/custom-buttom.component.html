@@ -1,5 +1,9 @@
-<button type="submit" [className]="classButton" [ngClass]="{'background-light-blue': isLoading}"
-    (click)="onClick()">
+<button 
+    type="submit" 
+    [className]="classButton" 
+    [ngClass]="{'background-light-blue': isLoading}"
+    
+    >
     <div *ngIf="isLoading" class="spinner-button">
         <mat-spinner [diameter]="30"></mat-spinner>
     </div>

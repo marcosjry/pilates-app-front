@@ -24,13 +24,8 @@ export class CustomButtomComponent {
   @Input() classText: string = ''; 
   @Input() classButton: string = ''; 
 
-  @Output() click = new EventEmitter<void>();
-
   constructor(private loading: LoadingService) {
     this.loading.isLoadingButton$.subscribe(value => this.isLoading = value);
   }
-
-  onClick() {
-    this.click.emit();
-  }
+  
 }
