@@ -3,7 +3,7 @@
     <div *ngFor="let class of todayClasses" class="list-container">
         <div class="list-item">
             <div class="hour-class">
-                <p class="text-bold">{{formatTime12h(class.startTime)}}</p>
+                <h4 class="text-bold">{{formatTime12h(class.startTime)}}</h4>
                 <p class="text">{{formatText(class.classroomType)}}</p>
             </div>
             <div class="student-item">
