@@ -1,6 +1,6 @@
 <nav class="nav-container">
     <ul class="nav-bar-wrapper">
-        <li class="nav-item" [class.active]="activeRoute === '/'" (click)="navigate('')">
+        <li class="nav-item" [class.active]="activeRoute === '/home'" (click)="navigate('home')">
             <mat-icon>home</mat-icon>
             <p>Home</p>
         </li>
@@ -21,6 +21,10 @@
         <li class="nav-item" [class.active]="activeRoute === '/turmas'" (click)="navigate('/turmas')">
             <mat-icon>event_upcoming</mat-icon>
             <p>Turmas</p>
+        </li>
+        <li class="nav-item" (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <p>Sair</p>
         </li>
     </ul>
 </nav>

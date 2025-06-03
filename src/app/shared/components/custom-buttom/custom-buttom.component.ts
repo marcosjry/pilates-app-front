@@ -16,7 +16,7 @@ import { LoadingService } from '../../services/loading.service';
 })
 export class CustomButtomComponent {
 
-  isLoading: boolean = false;
+  @Input() isLoading: boolean = false;
 
   @Input() haveIcon: boolean = false
   @Input() icon: string = '';
@@ -25,7 +25,7 @@ export class CustomButtomComponent {
   @Input() classButton: string = ''; 
 
   constructor(private loading: LoadingService) {
-    this.loading.isLoadingButton$.subscribe(value => this.isLoading = value);
+    
   }
   
 }
