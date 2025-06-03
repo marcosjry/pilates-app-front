@@ -2,8 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ClassroomTimeSlotComponent } from '../classroom-time-slot/classroom-time-slot.component';
 import { DateSelectComponent } from '../date-select/date-select.component';
 import { ClassroomService } from '../../services/classroom.service';
-import PresentCustomer from '../../models/classrom-present-customers';
-import { Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, debounceTime, Subject, takeUntil } from 'rxjs';
 import { ClassroomPresentCustomersComponent } from "../classroom-present-customers/classroom-present-customers.component";
 import { CommonModule } from '@angular/common';
 import { FilterComponent } from '../../../customers/components/filter/filter.component';
@@ -13,6 +12,10 @@ import { NoContentComponent } from "../../../../shared/components/no-content/no-
 import { CustomButtomComponent } from '../../../../shared/components/custom-buttom/custom-buttom.component';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { ErrorModalComponent } from '../../../../shared/components/error-modal/error-modal.component';
+import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
+import { LoadingSpinnerComponent } from '@shared/components/loading-spinner/loading-spinner.component';
+import { LoadingService } from '@shared/services/loading.service';
+import { PresentCustomer } from '../../models/classrom-present-customers';
 
 @Component({
   selector: 'app-classroom-schedule',
@@ -24,10 +27,23 @@ import { ErrorModalComponent } from '../../../../shared/components/error-modal/e
     CommonModule,
     SearchComponent,
     CustomButtomComponent,
-    NoContentComponent
+    NoContentComponent,
+    LoadingSpinnerComponent
 ],
   templateUrl: './classroom-schedule.component.html',
-  styleUrl: './classroom-schedule.component.scss'
+  styleUrl: './classroom-schedule.component.scss',
+  animations: [
+    trigger('listAnimation', [
+      transition('* => *', [ 
+        query(':enter', [ 
+          style({ opacity: 0, transform: 'translateY(20px)' }), 
+          stagger(100, [ 
+            animate('0.4s ease-out', style({ opacity: 1, transform: 'translateY(0)' })) 
+          ])
+        ], { optional: true }) 
+      ])
+    ])
+  ]
 })
 export class ClassroomScheduleComponent implements OnInit, OnDestroy {
 
@@ -37,19 +53,35 @@ export class ClassroomScheduleComponent implements OnInit, OnDestroy {
   selectedCustomerIds = new Set<string>(); 
   private destroy$ = new Subject<void>();  
 
+  filterIsLoadingSubject = new BehaviorSubject<boolean>(false);
+  filterIsLoading$ = this.filterIsLoadingSubject.asObservable();
+
+
+  isLoading: boolean = false;
+  filterIsLoading: boolean = false;
   private date: string = '';
   private hour: string = '';
 
 
-  constructor(private service: ClassroomService, private shared: SharedService) {}
+  constructor(
+    private service: ClassroomService, 
+    private shared: SharedService, 
+    private loading: LoadingService
+  ) {}
 
   ngOnInit(): void {
     this.service.allAvailableCustomers$.pipe(takeUntil(this.destroy$)).subscribe(value => this.allCustomersAvailable = value);
-    this.service.filterAvailableCustomers$.pipe(takeUntil(this.destroy$)).subscribe(value => this.filteredCustomers = value);
+    this.loading.isLoading$.pipe(takeUntil(this.destroy$), debounceTime(1500)).subscribe(value => this.isLoading = value);
+    this.filterIsLoading$.pipe(takeUntil(this.destroy$), debounceTime(800)).subscribe(value => this.filterIsLoading = value);
+    this.service.filterAvailableCustomers$.pipe(takeUntil(this.destroy$)).subscribe(value => {this.filteredCustomers = value;});
     this.service.hour$.pipe(takeUntil(this.destroy$)).subscribe(value => this.hour = value);
     this.service.date$.pipe(takeUntil(this.destroy$)).subscribe(value => this.date = value);
+    
+    this.isLoading = true;
     this.service.getAllAvailableCustomers();
     this.service.onFilter();
+    this.loading.isLoadingSubject.next(false);
+
   }
 
   onDateChange(date: string) {
@@ -63,12 +95,16 @@ export class ClassroomScheduleComponent implements OnInit, OnDestroy {
   onFilter(query: Customers) {
     const { paymentType } = query;
     this.service.pTypeSubject.next(paymentType);
+    this.filterIsLoading = true;
     this.service.onFilter();
+    this.filterIsLoadingSubject.next(false);
   }
 
   onSearch(query: string) {
     this.service.nameSubject.next(query);
+    this.filterIsLoading = true;
     this.service.onFilter();
+    this.filterIsLoadingSubject.next(false);
   }
 
   ngOnDestroy(): void {
