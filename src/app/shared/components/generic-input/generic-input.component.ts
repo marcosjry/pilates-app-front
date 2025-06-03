@@ -35,6 +35,8 @@ export class GenericInputComponent implements ControlValueAccessor, OnInit, OnDe
   @Input() submitted: boolean = false;
   @Input() options: { value: any; label: string }[] = [];
 
+  public isPasswordVisible: boolean = false;
+
   public internalFormControl: FormControl = new FormControl();
   private destroy$ = new Subject<void>();
 
@@ -112,4 +114,7 @@ export class GenericInputComponent implements ControlValueAccessor, OnInit, OnDe
     );
   }
 
+  togglePasswordVisibility(): void {
+    this.isPasswordVisible = !this.isPasswordVisible;
+  }
 }

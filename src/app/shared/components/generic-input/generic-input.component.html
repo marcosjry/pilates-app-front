@@ -29,6 +29,21 @@
       <mat-datepicker #picker></mat-datepicker>
     </div>
 
+    <div *ngSwitchCase="'password'" class="password-input-wrapper">
+      <input [formControl]="internalFormControl"
+             [type]="isPasswordVisible ? 'text' : 'password'"
+             [placeholder]="placeholder"
+             [id]="label | lowercase"
+             (blur)="onBlur()"
+             [ngClass]="{ 'is-invalid': isInvalid }" />
+      <button type="button"
+              class="toggle-password-visibility"
+              (click)="togglePasswordVisibility()"
+              aria-label="Alternar visibilidade da senha">
+        <mat-icon>{{ isPasswordVisible ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+    </div>
+
     <input *ngSwitchDefault
            [formControl]="internalFormControl"
            [type]="type"
