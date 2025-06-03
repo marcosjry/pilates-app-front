@@ -7,6 +7,7 @@ import { MatRadioModule } from '@angular/material/radio';
 
 import ClassroomHours from '../../models/classroom-hours';
 import { ClassroomService } from '../../services/classroom.service';
+import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 
 @Component({
   selector: 'app-classroom-time-slot',
@@ -19,7 +20,19 @@ import { ClassroomService } from '../../services/classroom.service';
     MatExpansionModule
 ],
   templateUrl: './classroom-time-slot.component.html',
-  styleUrl: './classroom-time-slot.component.scss'
+  styleUrl: './classroom-time-slot.component.scss',
+  animations: [
+    trigger('listAnimation', [
+      transition('* => *', [ 
+        query(':enter', [ 
+          style({ opacity: 0, transform: 'translateY(20px)' }), 
+          stagger(100, [ 
+            animate('0.4s ease-out', style({ opacity: 1, transform: 'translateY(0)' })) 
+          ])
+        ], { optional: true }) 
+      ])
+    ])
+  ]
 })
 export class ClassroomTimeSlotComponent {
 
