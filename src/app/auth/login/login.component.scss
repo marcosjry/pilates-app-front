@@ -1,0 +1,50 @@
+.login-content {
+    display: flex;
+    flex-direction: row;
+    border: none;
+    border-radius: none;
+    align-items: center;
+    flex: 1;
+    height: 100%;
+}
+
+.wrapper {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+}
+
+.wrapper:nth-child(1) {
+    background-color: rgb(212, 228, 255);
+    width: 50%;
+}
+
+.wrapper:nth-child(2) {
+    background-color: rgb(255, 255, 255);
+    width: 50%;
+    padding: 0 60px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+img {
+    width: 450px;
+}
+
+.no-results {
+    text-align: center;
+    color: red;
+}
+
+@media (max-width: 780px) {
+  .login-content {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,41 @@
+<div class="login-content">
+    <div class="wrapper">
+        <img mat-card-image src="https://i.imgur.com/3gHe5AS.png" alt="Photo of a Shiba Inu">
+        <h2>Movimente-se</h2>
+    </div>
+    <div class="wrapper">
+        <h1>Bem vindo de volta!</h1>
+        <p>Faça login para acessar sua conta.</p>
+        
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <app-generic-input
+                formControlName="userName"
+                label="Login"
+                placeholder="Ex: contaEmpresa"
+                [submitted]="submitted"
+            ></app-generic-input>
+            
+            <app-generic-input
+                [type]="'password'"
+                formControlName="password"
+                label="Senha"
+                placeholder="Digite sua Senha"
+                [submitted]="submitted"
+            ></app-generic-input>
+
+            <div *ngIf="haveMessageError" class="no-results">
+                <p>{{ messageError }}</p>
+            </div>
+
+            <app-custom-buttom
+                [isLoading]="isButtonLoading"
+                [haveIcon]="false"
+                [text]="'Entrar'"
+                [classButton]="'create-customer'"
+                [classText]="'light-text'"
+            ></app-custom-buttom>
+        </form>
+    </div>
+
+</div>    
+
