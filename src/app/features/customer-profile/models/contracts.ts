@@ -1,5 +1,12 @@
 import ContractsCustomer from "./contracts-from-user";
 
-export default interface Contracts {
+export interface Contracts {
     contratos: ContractsCustomer[]
+}
+
+export interface CustomerFrequency {
+    date: string,
+    classroomStartTime: string,
+    classroomType: string,
+    isPresent: boolean
 }

@@ -6,9 +6,9 @@ import ClassroomHours from '../models/classroom-hours';
 import { SharedService } from '../../../shared/services/shared.service';
 import { ErrorModalComponent } from '../../../shared/components/error-modal/error-modal.component';
 import { FormatTimePipe } from '../../../pipes/format-time.pipe';
-import PresentCustomer from '../models/classrom-present-customers';
 import ClassroomHourAndDate from '../models/classroom-filter';
 import { SuccessModalComponent } from '../../../shared/components/success-modal/success-modal.component';
+import { PresentCustomer } from '../models/classrom-present-customers';
 
 @Injectable({
   providedIn: 'root'
@@ -148,7 +148,7 @@ export class ClassroomService {
 
   onDeleteFrequency(customerId: string) {
     const classroomId = this.getClassroomIdFromHour(this.hourAndDate.hour);
-    this.http.delete<string>(`${this.baseUrl}/frequencia/delete?customerId=${customerId}&classroomId=${classroomId}`).subscribe({
+    this.http.delete<string>(`${this.baseUrl}/frequencia/delete?customerId=${customerId}&classroomId=${classroomId}&date=${this.hourAndDate.date}&hour=${this.hourAndDate.hour}`).subscribe({
       next: response => {
         this.shared.openSuccessModal(
           'Cliente removido da Aula.',
@@ -186,6 +186,34 @@ export class ClassroomService {
       error: error => {
         this.shared.openErrorModal(
           "Erro ao tentar Salvar Aula", 
+          ErrorModalComponent,
+          "Erro durante a tentativa de Salvar Aula no horário e dia especificado. Tente novamente."
+        );
+        console.log(error);
+      }
+
+    })
+  }
+
+  saveCustomersPresence(usersId: Set<String>) {
+    console.log(this.hourAndDate);
+    const customers = Array.from(usersId);
+    this.http.put(`${this.baseUrl}/frequencia/batch/change-presences`, { 
+      date: this.hourAndDate.date,
+      startTime: this.hourAndDate.hour,
+      customers: customers
+    }).subscribe({
+      next: response => {
+        this.shared.openSuccessModal(
+          'Presenças salvas com sucesso!',
+          SuccessModalComponent,
+          'As presenças foram salvas para os clientes informados.'
+        )
+        this.getPresentCustomersOnClassroom();
+      },
+      error: error => {
+        this.shared.openErrorModal(
+          "Erro ao tentar Salvar Presenças", 
           ErrorModalComponent,
           "Erro durante a tentativa de Salvar Aula no horário e dia especificado. Tente novamente."
         );
