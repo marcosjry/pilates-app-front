@@ -1,28 +1,34 @@
-<app-date-select (dateSelected)="onDateChange($event)"></app-date-select>
+<app-loading-spinner
+    [isLoading]="isLoading"
+    [spinnerSize]="80">
+</app-loading-spinner>
 
-<app-classroom-time-slot (onTimeFilter)="onFilterHour($event)"></app-classroom-time-slot>
+<div *ngIf="!isLoading" [@listAnimation]>
+    <app-date-select (dateSelected)="onDateChange($event)"></app-date-select>
+    <app-classroom-time-slot (onTimeFilter)="onFilterHour($event)"></app-classroom-time-slot>
+    <h4>Alunos agendados</h4>
 
-<h4>Alunos agendados</h4> 
-<div class="pill-list-container" formArrayName="itensSelecionados">
-    <div *ngFor="let customer of presentCustomers; let i = index" class="pill-item"> 
-        <label class="selected">
-            <div class="display-info">
-                <div class="info">
-                    <mat-icon>check</mat-icon>
-                    <div class="customer-info">
-                        <span>{{ customer.name }}</span> 
-                        <span class="roomType">{{ shared.capitalizeFirstLetter(customer.classroomType) }}</span> 
-                    </div>   
-                </div>
-                <div class="action" (click)="onDelete(customer.id)">
-                    <mat-icon>delete</mat-icon>
-                </div>
-            </div>
-        </label>
-    </div>
+    <app-classroom-present-customers 
+        *ngIf="presentCustomers.length > 0"
+        [isOnClassroomPage]="true"
+        [text]="'Selecione os Alunos'"
+        [customers]="presentCustomers" 
+        [initialSelectedIds]="selectedCustomerIds"
+        (selectionChange)="handleSelectionChange($event)">
+    </app-classroom-present-customers>
+
+    <app-custom-buttom 
+        (click)="onSubmit()"
+        *ngIf="presentCustomers.length > 0"
+        [icon]="'save'"
+        [haveIcon]="true"
+        [text]="'Salvar Presenças'"
+        [classButton]="'create-customer'"
+        [classText]="'light-text'">
+    </app-custom-buttom>
+
+    <app-no-content 
+        *ngIf="presentCustomers.length === 0"
+        [text]="'Nenhum Cliente encontrado, tente selecionar uma nova data ou horário.'">
+    </app-no-content>
 </div>
-
-<app-no-content 
-    *ngIf="presentCustomers.length === 0"
-    [text]="'Nenhum Cliente encontrado, tente selecionar uma nova data ou horário.'">
-</app-no-content>
