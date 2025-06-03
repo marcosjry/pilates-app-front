@@ -7,6 +7,12 @@
         (onFilter)="onFilter($event)">
     </app-filter>
 
+    <app-loading-spinner
+        [isLoading]="isLoading"
+        [spinnerSize]="80"
+        >
+    </app-loading-spinner>
+
     <app-customers-list
         *ngIf="customersList.length > 0 && !isLoading"
         [customers]="customersList"
@@ -17,9 +23,6 @@
         [text]="'Nenhum Cliente até o momento'">
     </app-no-content>
 
-    <app-loading-spinner
-        [spinnerSize]="80"
-        >
-    </app-loading-spinner>
+    
     
 </app-layout>

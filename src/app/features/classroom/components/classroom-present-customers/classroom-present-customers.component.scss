@@ -40,6 +40,18 @@ input {
   user-select: none; /* Impede a seleção de texto ao clicar */
 }
 
+.check-box {
+  display: flex;
+  align-items: center;
+}
+
+
+label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 /* Estilo do label quando o mouse passa por cima */
 .pill-item label:hover {
   background-color: #e5e5e5; /* Um cinza um pouco mais escuro no hover */
@@ -84,4 +96,15 @@ h3 {
     color: #333;
     margin-bottom: 15px;
     font-weight: 600;
+}
+
+.action mat-icon {
+  cursor: pointer;
+  font-size: 25px;
+  width: 25px;
+  padding: 5px;
+  height: 25px;
+  color: rgb(175, 20, 0);
+  border-radius: 50%;
+
 }

@@ -1,12 +1,17 @@
-<form [formGroup]="form">
-    <h4>{{text}}</h4> 
+<form [formGroup]="form" [@listAnimation]>
+    <h4 *ngIf="!isOnClassroomPage">{{text}}</h4> 
     <div class="pill-list-container" formArrayName="itensSelecionados">
         <div *ngFor="let item of customers; let i = index" class="pill-item"> 
-            <label [ngClass]="{'selected': itensSelecionadosFormArray.controls[i].value}">
-                <input type="checkbox" [formControlName]="i" > 
-                <div class="customer-info">
-                    <span>{{ item.name }}</span> 
-                    <span>{{ shared.capitalizeFirstLetter(item.classroomType)  }}</span> 
+            <label [ngClass]="{ 'selected': itensSelecionadosFormArray.controls[i].value }">
+                <div class="check-box ">
+                    <input type="checkbox" [formControlName]="i" > 
+                    <div class="customer-info">
+                        <span>{{ item.name }}</span> 
+                        <span>{{ shared.capitalizeFirstLetter(item.classroomType)  }}</span>
+                    </div>
+                </div>
+                <div *ngIf="isOnClassroomPage" class="action" (click)="onDelete(item.id)">
+                    <mat-icon>delete</mat-icon>
                 </div>
             </label>
         </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ExpiringContracts } from '../../models/expiring-contracts';
 import { DashboardService } from '../../services/dashboard.service';
 import { CommonModule, DatePipe, NgFor } from '@angular/common';
@@ -11,6 +11,7 @@ import { NoContentComponent } from '../../../../shared/components/no-content/no-
 import { LoadingService } from '../../../../shared/services/loading.service';
 import { LoadingSpinnerComponent } from '../../../../shared/components/loading-spinner/loading-spinner.component';
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+import { debounceTime, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-expiring-contracts',
@@ -39,21 +40,36 @@ import { animate, query, stagger, style, transition, trigger } from '@angular/an
     ])
   ]
 })
-export class ExpiringContractsComponent {
+export class ExpiringContractsComponent implements OnInit, OnDestroy {
+  
   expiringContracts!: ExpiringContracts[]
   isLoading: boolean = false;
+  private destroy$ = new Subject<void>();
 
   constructor(
     private service: DashboardService, 
     private shared: SharedService,
     private loading: LoadingService
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.service.expiringContracts$.subscribe(value => this.expiringContracts = value);
-    this.loading.isLoading$.subscribe(value => this.isLoading = value);
+    this.loading.isLoading$.pipe(
+      takeUntil(this.destroy$),
+      debounceTime(1500)
+    ).subscribe(value => this.isLoading = value);
+    this.isLoading = true;
     this.service.getExpiringContracts();
+    this.loading.isLoadingSubject.next(false);
   }
 
   formatText(text: string) {
     return this.shared.capitalizeFirstLetter(text);
   }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
 }
