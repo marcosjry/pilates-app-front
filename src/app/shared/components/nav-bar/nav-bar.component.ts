@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { NavigationEnd, Router } from '@angular/router';
+import { AuthService } from 'app/auth/auth.service';
 import { filter } from 'rxjs';
 
 @Component({
@@ -14,7 +15,7 @@ import { filter } from 'rxjs';
 export class NavBarComponent {
   activeRoute: string = '';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private auth: AuthService) { }
 
   ngOnInit() {
     // Detecta mudanças de rota para atualizar o item ativo
@@ -31,4 +32,10 @@ export class NavBarComponent {
   navigate(route: string) {
     this.router.navigate([route]);
   }
+
+  logout() {
+    this.auth.onLogout();
+    this.navigate('/');
+  }
+
 }
