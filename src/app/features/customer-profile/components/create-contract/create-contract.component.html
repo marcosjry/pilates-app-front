@@ -1,7 +1,7 @@
 <div class="create-panel" [class.expanded]="showCreation">
     <div class="back">
         <mat-icon (click)="toggleFilters()">close</mat-icon>
-        <h3>Crie um Contrato</h3>
+        <h3>{{ action }}</h3>
     </div>
     <form [formGroup]="form" >
         
@@ -28,6 +28,15 @@
             placeholder="Escolha a data"
             [submitted]="submitted">
         </app-generic-input>
+
+         <app-generic-input
+            *ngIf="type === 'edit'"
+            formControlName="endDate"
+            label="Data de Expiração"
+            type="date"
+            placeholder="Escolha a data"
+            [submitted]="submitted">
+        </app-generic-input>
         
         <app-generic-input
             formControlName="contractStatus"
@@ -42,7 +51,7 @@
             *ngIf="showCreation"
             [icon]="'save'"
             [haveIcon]="true"
-            [text]="'Adicionar Contrato'"
+            [text]="textButton"
             [classButton]="'create-customer'"
             [classText]="'light-text'"
         ></app-custom-buttom>
