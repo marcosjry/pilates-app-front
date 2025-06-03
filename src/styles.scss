@@ -78,3 +78,17 @@ h4 {
     font-weight: 500;
     color: #525252;
 }
+
+@media (max-width: 480px) {
+  .nav-item p {
+    font-size: 11px;
+  }
+  
+  p {
+    font-size: 11px !important;
+  }
+
+  h4, h3 {
+    font-size: 16px !important;
+  }
+}
