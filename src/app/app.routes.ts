@@ -10,11 +10,15 @@ import { ContractsComponent } from './features/contracts/contracts.component';
 import { ClassroomComponent } from './features/classroom/classroom.component';
 import { ClassroomClassesComponent } from './features/classroom/components/classroom-classes/classroom-classes.component';
 import { ClassroomScheduleComponent } from './features/classroom/components/classroom-schedule/classroom-schedule.component';
+import { LoginComponent } from './auth/login/login.component';
 
 export const routes: Routes = [
-
     {
         path: '',
+        component: LoginComponent
+    },
+    {
+        path: 'home',
         component: DashboardComponent
     },
     {
