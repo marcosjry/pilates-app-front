@@ -8,7 +8,7 @@ import { SharedService } from '../../../../shared/services/shared.service';
 import { NoContentComponent } from '../../../../shared/components/no-content/no-content.component';
 import { LoadingSpinnerComponent } from '../../../../shared/components/loading-spinner/loading-spinner.component';
 import { LoadingService } from '../../../../shared/services/loading.service';
-import { Subject, takeUntil } from 'rxjs';
+import { debounceTime, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-daily-classes',
@@ -42,15 +42,15 @@ export class DailyClassesComponent implements OnInit, OnDestroy {
         value => this.todayClasses = value
       );
     this.loading.isLoading$.pipe(
-      takeUntil(this.destroy$)).subscribe(
+      takeUntil(this.destroy$),
+      debounceTime(1500)
+    ).subscribe(
         value => this.isLoading = value
       );
 
-    this.loading.isLoadingSubject.next(true);
-    setTimeout(() => {
-      this.loading.isLoadingSubject.next(false);
-      this.service.getTodayClasses();
-    }, 1500)
+    this.isLoading = true;
+    this.loading.isLoadingSubject.next(false);
+    this.service.getTodayClasses();
   }
 
   ngOnDestroy() {
