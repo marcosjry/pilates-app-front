@@ -1,5 +1,6 @@
-export default interface PresentCustomer {
+export interface PresentCustomer {
     id: string,
     name: string,
-    classroomType: string
+    classroomType: string,
+    
 }
