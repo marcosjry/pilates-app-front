@@ -1,0 +1,35 @@
+<div class="profile-classes">
+    <mat-list> 
+        <div *ngFor="let freq of customerFrequency" class="list-container">
+            <div class="list-item">
+                <div>
+                    <div class="date">
+                        <mat-icon>today</mat-icon>
+                        <h4>{{ freq.date | formatoDataExtenso: 'EEEE, d \'de\' MMMM, y.'}}</h4>
+                    </div>
+                    <div class="date">
+                        <h3>Horário:</h3>
+                        <h4>{{ freq.classroomStartTime }} </h4>
+                    </div>
+                </div>
+                <div>
+                    <h4>{{ shared.capitalizeFirstLetter(freq.classroomType) }}</h4>
+                    <div class="presence">
+                        <h4>{{ freq.isPresent ? 'Presente' : 'Ausente'}}</h4>
+                        <mat-icon [ngClass]="{ 
+                            'presente' : freq.isPresent, 
+                            'ausente' : !freq.isPresent
+                            }">
+                            {{ freq.isPresent ? 'check_circle' : 'cancel'}}
+                        </mat-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-list>
+
+    <app-no-content
+        *ngIf="customerFrequency.length === 0"
+        [textContent]="'O aluno ainda não possui nenhuma aula agendada.'">
+    </app-no-content>
+</div>
