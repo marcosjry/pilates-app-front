@@ -35,6 +35,7 @@ export class ContractService {
   }
 
   createContract(contractInfo: ContractToCreate) {
+    console.log(contractInfo)
     const { classroomType, contractStatus, initDate, paymentType, price } = contractInfo;
     this.http.post(`${this.baseUrl}/contrato`, { classroomType, contractStatus, initDate, paymentType, price, customerId: this.currentCustomer.id }).subscribe({
       next: response => {
@@ -68,6 +69,26 @@ export class ContractService {
           'Erro ao carregar contratos', 
           ErrorModalComponent, 
           'Não foi possível carregar os Contratos no momento. Tente novamente.'
+        );
+        console.log(error);
+      }
+    })
+  }
+
+  onEditContract(contract: ContractsCustomer) {
+    const { contractId } = contract;
+    console.log('contrato atualizado: ', contract);
+    this.http.put(`${this.baseUrl}/contrato/${contractId}`, contract).subscribe({
+      next: response => {
+        this.service.getContractsFromCustomer(this.currentCustomer.id);
+        this.service.getLastContractFromCustomer(this.currentCustomer.id);
+        this.service.getCustomerInfo(this.currentCustomer.id);
+      },
+      error: error => {
+        this.shared.openErrorModal(
+          'Erro ao tentar editar Contrato', 
+          ErrorModalComponent, 
+          'Não foi possível editar o Contrato no momento. Tente novamente.'
         );
         console.log(error);
       }
