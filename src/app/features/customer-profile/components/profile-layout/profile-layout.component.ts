@@ -41,6 +41,7 @@ export class ProfileLayoutComponent implements OnInit {
       this.service.getLastContractFromCustomer(this.customerId);
       this.service.getCustomerInfo(this.customerId);
       this.service.getContractsFromCustomer(this.customerId);
+      this.service.getFrequenciesFromCustomer(this.customerId);
     }
   }
 
