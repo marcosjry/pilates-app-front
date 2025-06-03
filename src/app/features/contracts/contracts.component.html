@@ -11,12 +11,18 @@
         >
     </app-filter>
 
-    <app-contracts-list 
+    <app-loading-spinner [spinnerSize]="80"
+        [isLoading]="isLoading">
+    </app-loading-spinner>
+
+    <app-contracts-list
+        *ngIf="!isLoading"
+        [clickAble]="true" 
         [contracts]="contracts">
     </app-contracts-list>
 
     <app-no-content
-        *ngIf="contracts.length === 0"
+        *ngIf="contracts.length === 0 && !isLoading"
         [text]="'Nenhum Contrato até o momento'">
     </app-no-content>
 
