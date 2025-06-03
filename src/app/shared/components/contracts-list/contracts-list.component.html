@@ -1,26 +1,33 @@
-<mat-list> 
-        <div *ngFor="let contract of contracts" class="list-container">
-            <div class="list-item text-light">
-                <h4>{{ contract.customerName }}</h4>
+<mat-list [@listAnimation]="contracts.length"> 
+        <div *ngFor="let contract of contracts">
+            <div class="list-item text-light"
+                (click)="onClick(contract.customerId)"
+                [ngClass]="{'clickable': clickAble }">
                 <div class="content-align">
+                    <h4 *ngIf="contract.customerName">{{ contract.customerName }}</h4>
                     <div class="date-info">
                         <mat-icon>event_available</mat-icon>
                         <p>{{ contract.initDate | formatoDataExtenso: 'dd \'de\' MMMM\',\' yyyy' }}</p>
                         <p>-</p>
                         <p>{{ contract.endDate | formatoDataExtenso: 'dd \'de\' MMMM\',\' yyyy' }}</p>
                     </div>
-                    <div class="status-price">
-                        <p [ngClass]="shared.getStatusClass(contract.contractStatus)">
-                            {{contract.contractStatus | translateContractStatus}}
-                        </p>
-                        <p>R$ {{contract.price}}</p>
+                    <div class="paymentType">
+                        <p>Tipo de Pagamento</p>
+                        <p>|</p>
+                        <p>{{contract.paymentType | paymentFormato}}</p>
                     </div>
-                </div> 
-                <div class="paymentType">
-                    <p>Tipo de Pagamento</p>
-                    <p>|</p>
-                    <p>{{contract.paymentType | paymentFormato}}</p>
                 </div>
+                <div class="content-align">
+                    <p [ngClass]="shared.getStatusClass(contract.contractStatus)">
+                        {{contract.contractStatus | translateContractStatus}}
+                    </p>
+                    <p>R$ {{contract.price}}</p>
+                </div>
+                <mat-icon 
+                    *ngIf="isOnProfile" 
+                    class="clickable"
+                    (click)="onEdit(contract)"
+                    >edit</mat-icon>
             </div>
         </div>
 </mat-list>
