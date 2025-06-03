@@ -1,9 +1,12 @@
 <div class="profile-contracts-container">
 
-    <app-create-contract></app-create-contract>
+    <app-create-contract #ContractChild
+        ></app-create-contract>
 
     <h3>Histórico de Contratos</h3>
     <app-contracts-list
+        (editEvent)="setContractToEdit($event)"
+        [isOnProfile]="true"
         [contracts]="contracts"
     >
     </app-contracts-list>

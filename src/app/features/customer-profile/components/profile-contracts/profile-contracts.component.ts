@@ -1,14 +1,9 @@
-import { Component, NgModule, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CustomerProfileService } from '../../services/customer-profile.service';
 import ContractsCustomer from '../../models/contracts-from-user';
-import { CustomButtomComponent } from '../../../../shared/components/custom-buttom/custom-buttom.component';
-import { CommonModule, NgFor } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { SharedService } from '../../../../shared/services/shared.service';
-import { MatIcon } from '@angular/material/icon';
-import { FormatoDataExtensoPipe } from "../../../../pipes/formato-data-extenso.pipe";
-import { TranslateContractStatusPipe } from "../../../../pipes/translate-contract-status.pipe";
-import { PaymentFormatoPipe } from "../../../../pipes/payment-formato.pipe";
 import { Subject, takeUntil } from 'rxjs';
 import { ContractsListComponent } from "../../../../shared/components/contracts-list/contracts-list.component";
 import { CreateContractComponent } from '../create-contract/create-contract.component';
@@ -26,8 +21,10 @@ import { CreateContractComponent } from '../create-contract/create-contract.comp
 })
 export class ProfileContractsComponent implements OnInit, OnDestroy{
 
+  contractToEdit!: ContractsCustomer
   contracts: ContractsCustomer[] = []
   private destroy$ = new Subject<void>();
+  @ViewChild('ContractChild') childComponentRef!: CreateContractComponent;
 
   constructor(
     private service: CustomerProfileService,
@@ -39,6 +36,10 @@ export class ProfileContractsComponent implements OnInit, OnDestroy{
       takeUntil(this.destroy$)).subscribe(
         value => this.contracts = value
     );
+  }
+
+  setContractToEdit(contract: ContractsCustomer) {
+    this.childComponentRef.onEdit(contract);
   }
 
   ngOnDestroy() { // <--- Implemente o método
